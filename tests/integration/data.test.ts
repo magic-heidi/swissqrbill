@@ -18,9 +18,10 @@ import {
   minimalRequiredWithAmount,
   minimalRequiredWithDebtor,
   minimalRequiredWithEuro,
+  minimalRequiredWithGBP,
   minimalRequiredWithMaxedOutMessage,
   minimalRequiredWithMessage,
-  minimalRequiredWithPound
+  minimalRequiredWithUSD
 } from "swissqrbill:tests:data/valid-data.js";
 import { pdf } from "swissqrbill:tests:utils/pdf.js";
 import { svg } from "swissqrbill:tests:utils/svg.js";
@@ -155,8 +156,16 @@ describe("data", async () => {
 
   test("currency: GBP", async () => {
     const name = "currency";
-    const pdfSnapshot = await pdf(minimalRequiredWithPound, `data/${name}.pdf`);
-    const svgSnapshot = await svg(minimalRequiredWithPound, `data/${name}.svg`);
+    const pdfSnapshot = await pdf(minimalRequiredWithGBP, `data/${name}-GBP.pdf`);
+    const svgSnapshot = await svg(minimalRequiredWithGBP, `data/${name}-GBP.svg`);
+    expect(pdfSnapshot).toMatchSnapshot();
+    expect(svgSnapshot).toMatchSnapshot();
+  });
+
+  test("currency: USD", async () => {
+    const name = "currency";
+    const pdfSnapshot = await pdf(minimalRequiredWithUSD, `data/${name}-USD.pdf`);
+    const svgSnapshot = await svg(minimalRequiredWithUSD, `data/${name}-USD.svg`);
     expect(pdfSnapshot).toMatchSnapshot();
     expect(svgSnapshot).toMatchSnapshot();
   });

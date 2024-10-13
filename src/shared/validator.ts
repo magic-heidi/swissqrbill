@@ -105,7 +105,7 @@ export function validateData(data: Data): void {
   if(data.currency === undefined){ throw new ValidationError(ValidationErrors.CURRENCY_IS_UNDEFINED); }
   if(typeof data.currency !== "string"){ throw new ValidationError(ValidationErrors.CURRENCY_TYPE_IS_INVALID); }
   if(data.currency.length !== 3){ throw new ValidationError(ValidationErrors.CURRENCY_LENGTH_IS_INVALID); }
-  if(data.currency !== "CHF" && data.currency !== "EUR" && data.currency !== 'GBP'){ throw new ValidationError(ValidationErrors.CURRENCY_STRING_IS_INVALID); }
+  if(data.currency !== "CHF" && data.currency !== "EUR" && data.currency !== "GBP" && data.currency !== "USD"){ throw new ValidationError(ValidationErrors.CURRENCY_STRING_IS_INVALID); }
 
   // Debtor
   if(data.debtor !== undefined){

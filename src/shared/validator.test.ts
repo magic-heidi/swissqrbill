@@ -91,9 +91,10 @@ import {
   minimalRequiredWithAmount,
   minimalRequiredWithDebtor,
   minimalRequiredWithEuro,
+  minimalRequiredWithGBP,
   minimalRequiredWithMaxedOutMessage,
   minimalRequiredWithMessage,
-  minimalRequiredWithPound
+  minimalRequiredWithUSD
 } from "swissqrbill:tests:data/valid-data.js";
 
 
@@ -117,7 +118,8 @@ describe("validator", async () => {
     expect(() => validateData(cleanData(minimalRequiredWithMessage))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithMaxedOutMessage))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithEuro))).not.toThrow();
-    expect(() => validateData(cleanData(minimalRequiredWithPound))).not.toThrow();
+    expect(() => validateData(cleanData(minimalRequiredWithGBP))).not.toThrow();
+    expect(() => validateData(cleanData(minimalRequiredWithUSD))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithAdditionalInformation))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithAlternativeScheme1))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithAlternativeScheme2))).not.toThrow();
@@ -305,7 +307,7 @@ describe("validator", async () => {
       .toThrow(ValidationErrors.CURRENCY_LENGTH_IS_INVALID);
   });
 
-  it("should throw a ValidationError if the currency is not CHF or EUR", async () => {
+  it("should throw a ValidationError if the currency is not valid", async () => {
     expect(() => validateData(cleanData(invalidCurrency)))
       .toThrow(ValidationErrors.CURRENCY_STRING_IS_INVALID);
   });

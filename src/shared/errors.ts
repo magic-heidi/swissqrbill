@@ -68,7 +68,7 @@ export enum ValidationErrors {
   CREDITOR_ZIP_TYPE_IS_INVALID = "Creditor zip must be either a string or a number.",
   CURRENCY_IS_UNDEFINED = "Currency cannot be undefined.",
   CURRENCY_LENGTH_IS_INVALID = "Currency must be a length of 3 characters.",
-  CURRENCY_STRING_IS_INVALID = "Currency must be either 'CHF' or 'EUR'",
+  CURRENCY_STRING_IS_INVALID = "Currency must be 'CHF' or 'EUR' or 'GBP' or 'USD'.",
   CURRENCY_TYPE_IS_INVALID = "Currency must be a string.",
   DEBTOR_ADDRESS_IS_UNDEFINED = "Debtor address cannot be undefined.",
   DEBTOR_ADDRESS_LENGTH_IS_INVALID = "Debtor address must be a maximum of 70 characters.",
