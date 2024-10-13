@@ -25,7 +25,7 @@ jobs:
 
     - name: Build
       run: |
-        pnpm run build
+        pnpm run build:bundle && pnpm run build:cjs && pnpm run build:esm
         mkdir build
         cp -r lib build/lib
         cp package.json build/package.json
