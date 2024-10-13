@@ -152,6 +152,11 @@ export const minimalRequiredWithEuro: Data = {
   currency: "EUR"
 };
 
+export const minimalRequiredWithPound: Data = {
+  ...minimalRequired,
+  currency: "GBP"
+};
+
 // Additional Information
 export const minimalRequiredWithAdditionalInformation: Data = {
   ...minimalRequired,

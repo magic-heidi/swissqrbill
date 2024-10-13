@@ -389,6 +389,41 @@ EPD
 "
 `;
 
+exports[`generateQRData > currency: GBP 1`] = `
+"SPC
+0200
+1
+CH5800791123000889012
+K
+Creditor FirstName LastName
+Creditor Address
+1234 Creditor City
+
+
+CH
+
+
+
+
+
+
+
+
+GBP
+
+
+
+
+
+
+
+NON
+
+
+EPD
+"
+`;
+
 exports[`generateQRData > debtor with building number 1`] = `
 "SPC
 0200

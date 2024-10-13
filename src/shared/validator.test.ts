@@ -92,7 +92,8 @@ import {
   minimalRequiredWithDebtor,
   minimalRequiredWithEuro,
   minimalRequiredWithMaxedOutMessage,
-  minimalRequiredWithMessage
+  minimalRequiredWithMessage,
+  minimalRequiredWithPound
 } from "swissqrbill:tests:data/valid-data.js";
 
 
@@ -116,6 +117,7 @@ describe("validator", async () => {
     expect(() => validateData(cleanData(minimalRequiredWithMessage))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithMaxedOutMessage))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithEuro))).not.toThrow();
+    expect(() => validateData(cleanData(minimalRequiredWithPound))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithAdditionalInformation))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithAlternativeScheme1))).not.toThrow();
     expect(() => validateData(cleanData(minimalRequiredWithAlternativeScheme2))).not.toThrow();
