@@ -261,7 +261,7 @@ export class SwissQRBill {
       .fontSize("8pt");
 
     if(this.data.amount !== undefined){
-      amountContainer.addTSpan(formatAmount(this.data.amount))
+      amountContainer.addTSpan(formatAmount(this.data.amount, this.data.amountLocale))
         .x(`${amountXPosition}mm`)
         .fontFamily(this.font)
         .fontWeight("normal")
@@ -320,7 +320,7 @@ export class SwissQRBill {
       .fontSize("10pt");
 
     if(this.data.amount !== undefined){
-      paymentPartMiddleTextContainer.addTSpan(formatAmount(this.data.amount))
+      paymentPartMiddleTextContainer.addTSpan(formatAmount(this.data.amount, this.data.amountLocale))
         .x("22mm")
         .fontFamily(this.font)
         .fontWeight("normal")

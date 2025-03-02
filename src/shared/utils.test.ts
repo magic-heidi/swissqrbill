@@ -161,6 +161,11 @@ describe("utils", () => {
     expect(formatAmount(12345678.9)).toBe("12 345 678.90");
     expect(formatAmount(123456789)).toBe("123 456 789.00");
     expect(formatAmount(1234567890)).toBe("1 234 567 890.00");
+
+    // With locale
+    expect(formatAmount(0, "en-CH")).toMatchInlineSnapshot(`"0.00"`);
+    expect(formatAmount(1.2, "en-CH")).toMatchInlineSnapshot(`"1.20"`);
+    expect(formatAmount(1234567890, "en-CH")).toMatchInlineSnapshot(`"1’234’567’890.00"`);
   });
 
 });
