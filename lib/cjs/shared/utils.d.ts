@@ -88,9 +88,10 @@ export declare function formatReference(reference: string): string;
  * Formats the given amount according the specifications to be easily readable.
  *
  * @param amount Containing the amount to be formatted.
+ * @param locale Locale of formatting.
  * @returns The formatted amount.
  */
-export declare function formatAmount(amount: number): string;
+export declare function formatAmount(amount: number, locale?: string): string;
 /**
  * Converts millimeters to points.
  *

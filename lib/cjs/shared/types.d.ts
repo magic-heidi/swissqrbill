@@ -18,6 +18,10 @@ export interface Data {
      */
     amount?: number;
     /**
+     * Custom locale for amount.
+     */
+    amountLocale?: string;
+    /**
      * Alternative scheme. **Max. 100 characters.**.
      *
      * Parameter character chain of the alternative scheme according to the syntax definition in the [“Alternative scheme” section](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-en.pdf).
