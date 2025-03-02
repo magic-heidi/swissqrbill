@@ -166,7 +166,6 @@ export class SwissQRBill {
   }
 
   private render(doc: PDFKit.PDFDocument): void {
-
     // Lines
     if(this.outlines){
 
@@ -342,7 +341,7 @@ export class SwissQRBill {
     });
 
     if(this.data.amount !== undefined){
-      doc.text(formatAmount(this.data.amount), this.x(amountXPosition), this.y(71), {
+      doc.text(formatAmount(this.data.amount, this.data.amountLocale), this.x(amountXPosition), this.y(71), {
         lineGap: -.5,
         width: mm2pt(52 - amountXPosition)
       });
@@ -392,7 +391,7 @@ export class SwissQRBill {
     });
 
     if(this.data.amount !== undefined){
-      doc.text(formatAmount(this.data.amount), this.x(89), this.y(72), {
+      doc.text(formatAmount(this.data.amount, this.data.amountLocale), this.x(89), this.y(72), {
         lineGap: -.5,
         width: mm2pt(29)
       });

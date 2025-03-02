@@ -238,9 +238,19 @@ export function formatReference(reference: string): string {
  * Formats the given amount according the specifications to be easily readable.
  *
  * @param amount Containing the amount to be formatted.
+ * @param locale Locale of formatting.
  * @returns The formatted amount.
  */
-export function formatAmount(amount: number): string {
+export function formatAmount(amount: number, locale?: string): string {
+  if(locale){
+    return new Intl.NumberFormat(locale, {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+      signDisplay: "auto",
+      style: "decimal",
+      useGrouping: true
+    }).format(amount);
+  }
 
   const amountString = amount.toFixed(2);
   const amountArray = amountString.split(".");
