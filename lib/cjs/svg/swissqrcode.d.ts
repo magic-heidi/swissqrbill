@@ -7,9 +7,15 @@ export declare class SwissQRCode {
      *
      * @param data The data to be encoded in the QR code.
      * @param size The size of the QR code in mm.
+     * @param theme Customize QR colors.
      * @throws { ValidationError } Throws an error if the data is invalid.
      */
-    constructor(data: Data, size?: number);
+    constructor(data: Data, size?: number, theme?: {
+        crossBgColor: string;
+        crossBorderColor: string;
+        crossFillColor: string;
+        fillColor: string;
+    });
     /**
      * Outputs the SVG as a string.
      *
