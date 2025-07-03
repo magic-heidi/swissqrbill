@@ -2,6 +2,8 @@ import { SVG } from "svg-engine";
 
 import { renderQRCode, renderSwissCross } from "swissqrbill:shared:qr-code.js";
 
+import type { QRTheme } from "swissqrbill:shared:qr-code.js";
+
 // eslint-disable-next-line eslint-plugin-unused-imports/no-unused-imports
 import type { ValidationError } from "swissqrbill:errors";
 import type { Data } from "swissqrbill:types";
@@ -16,9 +18,10 @@ export class SwissQRCode {
    *
    * @param data The data to be encoded in the QR code.
    * @param size The size of the QR code in mm.
+   * @param theme Customize QR colors.
    * @throws { ValidationError } Throws an error if the data is invalid.
    */
-  constructor(data: Data, size: number = 46) {
+  constructor(data: Data, size: number = 46, theme?: QRTheme) {
 
     this.instance = new SVG();
 
@@ -33,7 +36,7 @@ export class SwissQRCode {
           `${blockSize}mm`,
           `${blockSize}mm`
         )
-        .fill("black");
+        .fill(theme?.fillColor ?? "black");
     });
 
     renderSwissCross(size, (xPos, yPos, width, height, fillColor) => {
@@ -45,7 +48,7 @@ export class SwissQRCode {
           `${height}mm`
         )
         .fill(fillColor);
-    });
+    }, theme);
 
   }
 

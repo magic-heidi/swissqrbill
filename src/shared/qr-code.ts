@@ -121,8 +121,26 @@ export function renderQRCode(data: Data, size: number, renderBlockFunction: (x: 
 
 }
 
+export interface SwissCrossTheme {
+  crossBgColor: string;
+  crossBorderColor: string;
+  crossFillColor: string;
+}
 
-export function renderSwissCross(size: number, renderRectFunction: (x: number, y: number, width: number, height: number, fillColor: string) => void) {
+export interface QRTheme extends SwissCrossTheme {
+  fillColor: string;
+}
+
+
+export function renderSwissCross(
+  size: number,
+  renderRectFunction: (x: number, y: number, width: number, height: number, fillColor: string) => void,
+  theme: SwissCrossTheme = {
+    crossBgColor: "black",
+    crossBorderColor: "white",
+    crossFillColor: "white"
+  }
+) {
 
   const scale = size / mm2pt(46);
 
@@ -137,7 +155,7 @@ export function renderSwissCross(size: number, renderRectFunction: (x: number, y
     size / 2 - swissCrossWhiteBackgroundSize / 2,
     swissCrossWhiteBackgroundSize,
     swissCrossWhiteBackgroundSize,
-    "white"
+    theme.crossBorderColor
   );
 
   renderRectFunction(
@@ -145,7 +163,7 @@ export function renderSwissCross(size: number, renderRectFunction: (x: number, y
     size / 2 - swissCrossBlackBackgroundSize / 2,
     swissCrossBlackBackgroundSize,
     swissCrossBlackBackgroundSize,
-    "black"
+    theme.crossBgColor
   );
 
   renderRectFunction(
@@ -153,7 +171,7 @@ export function renderSwissCross(size: number, renderRectFunction: (x: number, y
     size / 2 - swissCrossThickness / 2,
     swissCrossLength,
     swissCrossThickness,
-    "white"
+    theme.crossFillColor
   );
 
   renderRectFunction(
@@ -161,7 +179,7 @@ export function renderSwissCross(size: number, renderRectFunction: (x: number, y
     size / 2 - swissCrossLength / 2,
     swissCrossThickness,
     swissCrossLength,
-    "white"
+    theme.crossFillColor
   );
 
 }

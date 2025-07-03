@@ -1,3 +1,6 @@
+import type { QRTheme } from "swissqrbill:shared:qr-code";
+
+
 export interface Data {
 
   /**
@@ -134,6 +137,8 @@ interface QRBillOptions {
    * @default `true`
    */
   outlines?: boolean;
+
+  qrTheme?: QRTheme;
 
   /**
    * Whether you want to show the scissors icons or the text `Separate before paying in`.

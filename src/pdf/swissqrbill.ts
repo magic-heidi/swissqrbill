@@ -56,6 +56,7 @@ export class SwissQRBill {
   private outlines: boolean = true;
   private language: Language = "DE";
   private font: string = "Helvetica";
+  private qrTheme;
 
   private _x: number = 0;
   private _y: number = 0;
@@ -79,6 +80,7 @@ export class SwissQRBill {
     this.language = options?.language !== undefined ? options.language : this.language;
     this.outlines = options?.outlines !== undefined ? options.outlines : this.outlines;
     this.font = options?.fontName !== undefined ? options.fontName : this.font;
+    this.qrTheme = options?.qrTheme;
 
     if(options?.scissors !== undefined){
       this.scissors = options.scissors;
@@ -368,7 +370,7 @@ export class SwissQRBill {
     });
 
     // QR Code
-    const swissQRCode = new SwissQRCode(this.data);
+    const swissQRCode = new SwissQRCode(this.data, undefined, this.qrTheme);
     swissQRCode.attachTo(doc, this.x(67), this.y(17));
 
     // Amount

@@ -46,6 +46,7 @@ export class SwissQRBill {
 
   public instance: SVG;
 
+  private qrTheme;
   private scissors: boolean = true;
   private outlines: boolean = true;
   private language: Language = "DE";
@@ -68,6 +69,7 @@ export class SwissQRBill {
     this.outlines = options?.outlines !== undefined ? options.outlines : this.outlines;
     this.font = options?.fontName !== undefined ? options.fontName : this.font;
     this.scissors = options?.scissors !== undefined ? options.scissors : this.scissors;
+    this.qrTheme = options?.qrTheme;
 
     // Create SVG
     this.instance = new SVG();
@@ -555,7 +557,7 @@ export class SwissQRBill {
 
   private _renderQRCode() {
 
-    const qrCode = new SwissQRCode(this.data);
+    const qrCode = new SwissQRCode(this.data, undefined, this.qrTheme);
     qrCode.instance
       .x("67mm")
       .y("17mm");
