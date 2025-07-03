@@ -12,7 +12,12 @@ describe("swissqrcode", () => {
 
     const name = "swissqrcode/default.svg";
     const svg = new TestDocument(name);
-    const qrCode = new SwissQRCode(minimalRequiredWithAlternativeScheme1and2);
+    const qrCode = new SwissQRCode(minimalRequiredWithAlternativeScheme1and2, undefined, {
+      crossBgColor: "red",
+      crossBorderColor: "white",
+      crossFillColor: "white",
+      fillColor: "#23455F"
+    });
 
     svg.width(mm2pt(200));
     svg.height(mm2pt(200));

@@ -16,9 +16,15 @@ export class SwissQRCode {
    *
    * @param data The data to be encoded in the QR code.
    * @param size The size of the QR code in mm.
+   * @param theme Customize QR colors.
    * @throws { ValidationError } Throws an error if the data is invalid.
    */
-  constructor(data: Data, size: number = 46) {
+  constructor(data: Data, size: number = 46, theme = {
+    crossBgColor: "black",
+    crossBorderColor: "white",
+    crossFillColor: "white",
+    fillColor: "black"
+  }) {
 
     this.instance = new SVG();
 
@@ -33,7 +39,7 @@ export class SwissQRCode {
           `${blockSize}mm`,
           `${blockSize}mm`
         )
-        .fill("black");
+        .fill(theme.fillColor);
     });
 
     renderSwissCross(size, (xPos, yPos, width, height, fillColor) => {
@@ -45,7 +51,7 @@ export class SwissQRCode {
           `${height}mm`
         )
         .fill(fillColor);
-    });
+    }, theme);
 
   }
 
