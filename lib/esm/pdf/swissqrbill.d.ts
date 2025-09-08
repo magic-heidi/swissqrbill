@@ -45,6 +45,7 @@ export declare class SwissQRBill {
     private outlines;
     private language;
     private font;
+    private qrTheme;
     private _x;
     private _y;
     /**

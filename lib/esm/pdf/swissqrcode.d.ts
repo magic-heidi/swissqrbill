@@ -1,5 +1,7 @@
+import { QRTheme } from '../shared/qr-code.js';
 import { Data } from '../shared/types.js';
 export declare class SwissQRCode {
+    private theme?;
     private size;
     private data;
     /**
@@ -7,9 +9,10 @@ export declare class SwissQRCode {
      *
      * @param data The data to be encoded in the QR code.
      * @param size The size of the QR code in mm.
+     * @param theme
      * @throws { ValidationError } Throws an error if the data is invalid.
      */
-    constructor(data: Data, size?: number);
+    constructor(data: Data, size?: number, theme?: QRTheme | undefined);
     /**
      * Attaches the Swiss QR Code to a PDF document.
      *

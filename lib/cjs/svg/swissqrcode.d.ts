@@ -1,4 +1,5 @@
 import { SVG } from 'svg-engine';
+import { QRTheme } from '../shared/qr-code.js';
 import { Data } from '../shared/types.js';
 export declare class SwissQRCode {
     instance: SVG;
@@ -10,12 +11,7 @@ export declare class SwissQRCode {
      * @param theme Customize QR colors.
      * @throws { ValidationError } Throws an error if the data is invalid.
      */
-    constructor(data: Data, size?: number, theme?: {
-        crossBgColor: string;
-        crossBorderColor: string;
-        crossFillColor: string;
-        fillColor: string;
-    });
+    constructor(data: Data, size?: number, theme?: QRTheme);
     /**
      * Outputs the SVG as a string.
      *

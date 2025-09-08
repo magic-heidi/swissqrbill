@@ -34,6 +34,7 @@ import { Data, SVGOptions } from '../shared/types.js';
  */
 export declare class SwissQRBill {
     instance: SVG;
+    private qrTheme;
     private scissors;
     private outlines;
     private language;
