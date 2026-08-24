@@ -8,7 +8,7 @@ import { formatAmount, formatIBAN, formatReference, getReferenceType, mm2px, pt2
 
 import { calculateTextWidth } from "./character-width.js";
 
-import type { Creditor, Data, Debtor, FontName, Language, SVGOptions } from "swissqrbill:types";
+import type { Creditor, Data, Debtor, FontName, Language, QRTheme, SVGOptions } from "swissqrbill:types";
 
 /**
  * The SwissQRBill class creates the Payment Part with the QR Code as an SVG.
@@ -52,6 +52,7 @@ export class SwissQRBill {
   private font: FontName = "Arial";
   private renderAdditionalInformation: boolean = true;
   private data: Data;
+  private qrTheme: QRTheme | undefined;
 
 
   constructor(data: Data, options?: SVGOptions) {
@@ -70,6 +71,7 @@ export class SwissQRBill {
     this.font = options?.fontName !== undefined ? options.fontName : this.font;
     this.scissors = options?.scissors !== undefined ? options.scissors : this.scissors;
     this.renderAdditionalInformation = options?.renderAdditionalInformation !== undefined ? options.renderAdditionalInformation : this.renderAdditionalInformation;
+    this.qrTheme = options?.qrTheme;
 
     // Create SVG
     this.instance = new SVG();
@@ -577,7 +579,7 @@ export class SwissQRBill {
 
   private _renderQRCode() {
 
-    const qrCode = new SwissQRCode(this.data);
+    const qrCode = new SwissQRCode(this.data, undefined, this.qrTheme);
     qrCode.instance
       .x("67mm")
       .y("17mm");

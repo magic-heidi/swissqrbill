@@ -51,6 +51,27 @@ describe("options", async () => {
     expect(svgSnapshot).toMatchSnapshot();
   });
 
+  test("qr theme", async () => {
+    const options = {
+      qrTheme: {
+        cross: {
+          bgColor: "red",
+          borderColor: "white",
+          fillColor: "white"
+        },
+        moduleColor: "#303030"
+      }
+    };
+
+    const pdfSnapshot = await pdf(minimalRequired, "options/qr-theme.pdf", options);
+    const svgSnapshot = await svg(minimalRequired, "options/qr-theme.svg", options);
+
+    expect(pdfSnapshot.join("\n")).toContain("0.18823529411764706 0.18823529411764706 0.18823529411764706 scn");
+    expect(pdfSnapshot.join("\n")).toContain("1 0 0 scn");
+    expect(svgSnapshot).toContain('fill="#303030"');
+    expect(svgSnapshot).toContain('fill="red"');
+  });
+
   test("additional information visible", async () => {
     const name = "additional-information-visible";
     const pdfSnapshot = await pdf(minimalRequiredWithAdditionalInformation, `options/${name}.pdf`, { renderAdditionalInformation: true });

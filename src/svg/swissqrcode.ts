@@ -1,6 +1,7 @@
 import { SVG } from "svg-engine";
 
 import { renderQRCode, renderSwissCross } from "swissqrbill:shared:qr-code.js";
+import { QRTheme } from "swissqrbill:shared:qr-theme.js";
 
 import type { ValidationError } from "swissqrbill:errors";
 import type { Data } from "swissqrbill:types";
@@ -15,14 +16,17 @@ export class SwissQRCode {
    *
    * @param data The data to be encoded in the QR code.
    * @param size The size of the QR code in mm.
+   * @param theme Colors used to render the QR code.
    * @throws { ValidationError } Throws an error if the data is invalid.
    */
-  constructor(data: Data, size: number = 46) {
+  constructor(data: Data, size: number = 46, theme?: QRTheme) {
 
     this.instance = new SVG();
 
     this.instance.width(`${size}mm`);
     this.instance.height(`${size}mm`);
+
+    const resolvedTheme = QRTheme.resolve(theme);
 
     renderQRCode(data, size, (xPos, yPos, blockSize) => {
       this.instance
@@ -32,7 +36,7 @@ export class SwissQRCode {
           `${blockSize}mm`,
           `${blockSize}mm`
         )
-        .fill("black");
+        .fill(resolvedTheme.moduleColor);
     });
 
     renderSwissCross(size, (xPos, yPos, width, height, fillColor) => {
@@ -44,7 +48,7 @@ export class SwissQRCode {
           `${height}mm`
         )
         .fill(fillColor);
-    });
+    }, resolvedTheme);
 
   }
 

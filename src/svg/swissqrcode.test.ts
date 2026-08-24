@@ -61,4 +61,17 @@ describe("swissqrcode", () => {
 
   });
 
+  test("applies a partial theme", () => {
+
+    const qrCode = new SwissQRCode(minimalRequiredWithAlternativeScheme1and2, 46, {
+      cross: { bgColor: "#654321" },
+      moduleColor: "#123456"
+    });
+
+    expect(qrCode.toString()).toContain('fill="#123456"');
+    expect(qrCode.toString()).toContain('fill="#654321"');
+    expect(qrCode.toString()).toContain('fill="white"');
+
+  });
+
 });

@@ -1,5 +1,6 @@
 import { cleanData } from "swissqrbill:shared:cleaner.js";
 import { renderQRCode, renderSwissCross } from "swissqrbill:shared:qr-code.js";
+import { QRTheme } from "swissqrbill:shared:qr-theme.js";
 import { validateData } from "swissqrbill:shared:validator.js";
 import { mm2pt } from "swissqrbill:utils";
 
@@ -11,17 +12,20 @@ export class SwissQRCode {
 
   private size: number;
   private data: Data;
+  private theme: ReturnType<typeof QRTheme.resolve>;
 
   /**
    * Creates a Swiss QR Code.
    *
    * @param data The data to be encoded in the QR code.
    * @param size The size of the QR code in mm.
+   * @param theme Colors used to render the QR code.
    * @throws { ValidationError } Throws an error if the data is invalid.
    */
-  constructor(data: Data, size: number = 46) {
+  constructor(data: Data, size: number = 46, theme?: QRTheme) {
     this.size = mm2pt(size);
     this.data = cleanData(data);
+    this.theme = QRTheme.resolve(theme);
     validateData(this.data);
   }
 
@@ -48,7 +52,7 @@ export class SwissQRCode {
       );
     });
 
-    doc.fillColor("black");
+    doc.fillColor(this.theme.moduleColor);
     doc.fill();
 
     renderSwissCross(this.size, (xPos, yPos, width, height, fillColor) => {
@@ -61,7 +65,7 @@ export class SwissQRCode {
         )
         .fillColor(fillColor)
         .fill();
-    });
+    }, this.theme);
 
     doc.restore();
 

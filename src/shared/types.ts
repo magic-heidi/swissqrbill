@@ -1,3 +1,8 @@
+import type { QRTheme } from "./qr-theme.js";
+
+
+export type { QRTheme } from "./qr-theme.js";
+
 export interface Data {
 
   /**
@@ -98,6 +103,12 @@ export interface Creditor extends Debtor {
   account: string;
 }
 
+/**
+ * Colors used to render a Swiss QR code.
+ *
+ * All properties are optional. Unspecified colors use the standard black and
+ * white Swiss QR code appearance.
+ */
 interface QRBillOptions {
 
   /**
@@ -129,6 +140,14 @@ interface QRBillOptions {
    * @default `true`
    */
   outlines?: boolean;
+
+  /**
+   * Colors used to render the Swiss QR code.
+   *
+   * Use a sufficiently dark `moduleColor` on a light background to preserve
+   * scan reliability.
+   */
+  qrTheme?: QRTheme;
 
   /**
    * Whether you want to render `additionalInformation` visibly in the payment part text.

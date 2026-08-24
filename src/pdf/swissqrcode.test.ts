@@ -64,4 +64,33 @@ describe("swissqrcode", () => {
 
   });
 
+  it("applies a partial theme", () => {
+
+    const colors: string[] = [];
+    const document = {
+      fill: () => document,
+      fillColor: (color: string) => {
+        colors.push(color);
+        return document;
+      },
+      rect: () => document,
+      restore: () => document,
+      save: () => document,
+      translate: () => document,
+      x: 0,
+      y: 0
+    };
+    const qrCode = new SwissQRCode(minimalRequiredWithAlternativeScheme1and2, 46, {
+      cross: { bgColor: "#654321" },
+      moduleColor: "#123456"
+    });
+
+    qrCode.attachTo(document as unknown as PDFKit.PDFDocument);
+
+    expect(colors).toContain("#123456");
+    expect(colors).toContain("#654321");
+    expect(colors).toContain("white");
+
+  });
+
 });

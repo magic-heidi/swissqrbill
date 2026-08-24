@@ -5,7 +5,7 @@ import { validateData } from "swissqrbill:shared:validator.js";
 import { formatAmount, formatIBAN, formatReference, getReferenceType, mm2pt, pt2mm } from "swissqrbill:utils";
 
 import type { ValidationError } from "swissqrbill:errors";
-import type { Creditor, Data, Debtor, Language, PDFOptions } from "swissqrbill:types";
+import type { Creditor, Data, Debtor, Language, PDFOptions, QRTheme } from "swissqrbill:types";
 
 
 /**
@@ -56,6 +56,7 @@ export class SwissQRBill {
   private language: Language = "DE";
   private font: string = "Helvetica";
   private renderAdditionalInformation: boolean = true;
+  private qrTheme: QRTheme | undefined;
 
   private _x: number = 0;
   private _y: number = 0;
@@ -80,6 +81,7 @@ export class SwissQRBill {
     this.outlines = options?.outlines !== undefined ? options.outlines : this.outlines;
     this.font = options?.fontName !== undefined ? options.fontName : this.font;
     this.renderAdditionalInformation = options?.renderAdditionalInformation !== undefined ? options.renderAdditionalInformation : this.renderAdditionalInformation;
+    this.qrTheme = options?.qrTheme;
 
     if(options?.scissors !== undefined){
       this.scissors = options.scissors;
@@ -370,7 +372,7 @@ export class SwissQRBill {
     });
 
     // QR Code
-    const swissQRCode = new SwissQRCode(this.data);
+    const swissQRCode = new SwissQRCode(this.data, undefined, this.qrTheme);
     swissQRCode.attachTo(doc, this.x(67), this.y(17));
 
     // Amount
