@@ -772,7 +772,7 @@ Defined in: [src/shared/types.ts](../../src/shared/types.ts#L171C0)
   
 ##### Type
   
-`"CHF"` | `"EUR"`  
+`"CHF"` | `"EUR"` | `"GBP"` | `"USD"`
   
 <br/>
   
@@ -781,7 +781,7 @@ Defined in: [src/shared/types.ts](../../src/shared/types.ts#L171C0)
 Defined in: [src/shared/types.ts](../../src/shared/types.ts#L1C0)  
   
 - **types.creditor** [`Creditor`](#interface-typescreditor) Creditor related data.
-- **types.currency** `"CHF"` | `"EUR"` The currency to be used. **3 characters.**.
+- **types.currency** `"CHF"` | `"EUR"` | `"GBP"` | `"USD"` The currency to be used. **3 characters.**.
 - **types.additionalInformation** [`string`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) Additional information. **Max 140 characters.**.
   
   Bill information contain coded information for automated booking of the payment. The data is not forwarded with the payment. `optional`
@@ -1351,7 +1351,7 @@ Defined in: [src/shared/errors.ts](../../src/shared/errors.ts#L37C0)
 - CREDITOR_ZIP_TYPE_IS_INVALID `"Creditor zip must be either a string or a number."`
 - CURRENCY_IS_UNDEFINED `"Currency cannot be undefined."`
 - CURRENCY_LENGTH_IS_INVALID `"Currency must be a length of 3 characters."`
-- CURRENCY_STRING_IS_INVALID `"Currency must be either 'CHF' or 'EUR'"`
+- CURRENCY_STRING_IS_INVALID `"Currency must be 'CHF' or 'EUR' or 'GBP' or 'USD'."`
 - CURRENCY_TYPE_IS_INVALID `"Currency must be a string."`
 - DEBTOR_ADDRESS_IS_UNDEFINED `"Debtor address cannot be undefined."`
 - DEBTOR_ADDRESS_LENGTH_IS_INVALID `"Debtor address must be a maximum of 70 characters."`

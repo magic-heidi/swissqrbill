@@ -20,8 +20,10 @@ import {
   minimalRequiredWithAmount,
   minimalRequiredWithDebtor,
   minimalRequiredWithEuro,
+  minimalRequiredWithGBP,
   minimalRequiredWithMaxedOutMessage,
-  minimalRequiredWithMessage
+  minimalRequiredWithMessage,
+  minimalRequiredWithUSD
 } from "swissqrbill:tests:data/valid-data.js";
 
 
@@ -104,6 +106,16 @@ describe("generateQRData", () => {
   // Currency
   test("currency", () => {
     const qrString = generateQRData(minimalRequiredWithEuro);
+    expect(qrString).toMatchSnapshot();
+  });
+
+  test("currency: GBP", () => {
+    const qrString = generateQRData(minimalRequiredWithGBP);
+    expect(qrString).toMatchSnapshot();
+  });
+
+  test("currency: USD", () => {
+    const qrString = generateQRData(minimalRequiredWithUSD);
     expect(qrString).toMatchSnapshot();
   });
 

@@ -13,7 +13,7 @@ export interface Data {
   /**
    * The currency to be used. **3 characters.**.
    */
-  currency: "CHF" | "EUR";
+  currency: "CHF" | "EUR" | "GBP" | "USD";
 
   /**
    * Additional information. **Max 140 characters.**.

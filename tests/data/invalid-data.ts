@@ -297,7 +297,7 @@ export const currencyTooLong = {
 // Invalid currency
 export const invalidCurrency = {
   ...minimalRequired,
-  currency: "USD"
+  currency: "BHD"
 } as unknown as Data;
 
 // Debtor with missing name

@@ -42,7 +42,7 @@ Defined in: [src/shared/types.ts](../../src/shared/types.ts#L171C0)
   
 #### Type
   
-`"CHF"` | `"EUR"`  
+`"CHF"` | `"EUR"` | `"GBP"` | `"USD"`
   
 <br/>
   
@@ -51,7 +51,7 @@ Defined in: [src/shared/types.ts](../../src/shared/types.ts#L171C0)
 Defined in: [src/shared/types.ts](../../src/shared/types.ts#L1C0)  
   
 - **creditor** [`Creditor`](#interface-creditor) Creditor related data.
-- **currency** `"CHF"` | `"EUR"` The currency to be used. **3 characters.**.
+- **currency** `"CHF"` | `"EUR"` | `"GBP"` | `"USD"` The currency to be used. **3 characters.**.
 - **additionalInformation** [`string`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) Additional information. **Max 140 characters.**.
   
   Bill information contain coded information for automated booking of the payment. The data is not forwarded with the payment. `optional`
