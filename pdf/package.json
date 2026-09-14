@@ -1,0 +1,4 @@
+{
+  "main": "../lib/cjs/pdf/index.cjs",
+  "types": "../lib/cjs/pdf/index.d.ts"
+}

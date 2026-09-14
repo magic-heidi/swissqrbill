@@ -34,12 +34,13 @@ import { Data, SVGOptions } from '../shared/types.js';
  */
 export declare class SwissQRBill {
     instance: SVG;
-    private qrTheme;
     private scissors;
     private outlines;
     private language;
     private font;
+    private renderAdditionalInformation;
     private data;
+    private qrTheme;
     constructor(data: Data, options?: SVGOptions);
     /**
      * Outputs the SVG as a string.

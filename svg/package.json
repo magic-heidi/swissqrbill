@@ -1,0 +1,4 @@
+{
+  "main": "../lib/cjs/svg/index.cjs",
+  "types": "../lib/cjs/svg/index.d.ts"
+}

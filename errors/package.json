@@ -1,0 +1,4 @@
+{
+  "main": "../lib/cjs/shared/errors.cjs",
+  "types": "../lib/cjs/shared/errors.d.ts"
+}

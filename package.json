@@ -1,5 +1,5 @@
 {
-  "version": "4.1.0",
+  "version": "4.4.1",
   "type": "module",
   "name": "swissqrbill",
   "description": "Swiss QR Bill generation in Node.js and browsers",
@@ -15,54 +15,48 @@
   },
   "sideEffects": false,
   "exports": {
-    "./bundle": {
-      "import": "./lib/esm/bundle/index.js",
-      "require": {
-        "require": "./lib/cjs/bundle/index.js",
-        "types": "./lib/cjs/bundle/index.d.ts"
-      }
-    },
     "./errors": {
-      "import": "./lib/esm/shared/errors.js",
       "require": {
-        "require": "./lib/cjs/shared/errors.cjs",
-        "types": "./lib/cjs/shared/errors.d.ts"
-      }
+        "types": "./lib/cjs/shared/errors.d.ts",
+        "require": "./lib/cjs/shared/errors.cjs"
+      },
+      "import": "./lib/esm/shared/errors.js"
     },
     "./pdf": {
-      "import": "./lib/esm/pdf/index.js",
       "require": {
-        "require": "./lib/cjs/pdf/index.cjs",
-        "types": "./lib/cjs/pdf/index.d.ts"
-      }
+        "types": "./lib/cjs/pdf/index.d.ts",
+        "require": "./lib/cjs/pdf/index.cjs"
+      },
+      "import": "./lib/esm/pdf/index.js"
     },
     "./svg": {
-      "import": "./lib/esm/svg/index.js",
       "require": {
-        "require": "./lib/cjs/svg/index.cjs",
-        "types": "./lib/cjs/svg/index.d.ts"
-      }
+        "types": "./lib/cjs/svg/index.d.ts",
+        "require": "./lib/cjs/svg/index.cjs"
+      },
+      "import": "./lib/esm/svg/index.js"
     },
     "./types": {
-      "import": "./lib/esm/shared/types.js",
       "require": {
-        "require": "./lib/cjs/shared/types.cjs",
-        "types": "./lib/cjs/shared/types.d.ts"
-      }
+        "types": "./lib/cjs/shared/types.d.ts",
+        "require": "./lib/cjs/shared/types.cjs"
+      },
+      "import": "./lib/esm/shared/types.js"
     },
     "./utils": {
-      "import": "./lib/esm/shared/utils.js",
       "require": {
-        "require": "./lib/cjs/shared/utils.cjs",
-        "types": "./lib/cjs/shared/utils.d.ts"
-      }
+        "types": "./lib/cjs/shared/utils.d.ts",
+        "require": "./lib/cjs/shared/utils.cjs"
+      },
+      "import": "./lib/esm/shared/utils.js"
     }
   },
   "scripts": {
     "build": "npm run build:bundle && npm run build:cjs && npm run build:esm",
     "build:bundle": "vite build --config vite.config.bundle.ts",
-    "build:cjs": "vite build --config vite.config.cjs.ts && echo '{ \"type\": \"commonjs\" }' > lib/cjs/package.json",
-    "build:esm": "vite build --config vite.config.ts && echo '{ \"type\": \"module\" }' > lib/esm/package.json",
+    "build:cjs": "vite build --config vite.config.cjs.ts && node --experimental-strip-types scripts/cjs.ts",
+    "build:esm": "vite build --config vite.config.ts && node --experimental-strip-types scripts/esm.ts",
+    "clean": "rm -r ./pdf && rm -r ./svg && rm -r ./errors && rm -r ./types && rm -r ./utils",
     "docs": "npm run docs:pdf && npm run docs:svg && npm run docs:utils && npm run docs:errors && npm run docs:bundle",
     "docs:bundle": "unwritten src/bundle/index.ts -t tsconfig.docs.json -o docs/bundle/ ",
     "docs:errors": "unwritten src/shared/errors.ts -t tsconfig.docs.json -o docs/errors/",
@@ -78,18 +72,21 @@
     "markdownlint": "markdownlint-cli2 '**/*.md' '#node_modules'",
     "markdownlint:ci": "npm run markdownlint",
     "markdownlint:fix": "npm run markdownlint -- --fix",
-    "postrelease:alpha": "npm run postrelease",
-    "postrelease:beta": "npm run postrelease",
-    "postrelease:latest": "eslint --fix package.json &&  markdownlint-cli2 --fix 'CHANGELOG.md'",
+    "postbuild": "node --experimental-strip-types scripts/node10.ts",
+    "postpublish": "npm run clean",
+    "postrelease:alpha": "eslint --fix package.json && markdownlint-cli2 --fix 'CHANGELOG.md'",
+    "postrelease:beta": "eslint --fix package.json && markdownlint-cli2 --fix 'CHANGELOG.md'",
+    "postrelease:latest": "eslint --fix package.json && markdownlint-cli2 --fix 'CHANGELOG.md'",
     "prebuild": "npm run typecheck && npm run lint && npm run spellcheck",
+    "prepare": "npm run build",
     "prerelease:alpha": "npm run test -- --run && npm run build",
     "prerelease:beta": "npm run test -- --run && npm run build",
     "prerelease:latest": "npm run test -- --run && npm run build",
-    "publish:alpha": "npm run publish:latest -- --publishTag alpha",
-    "publish:beta": "npm run publish:latest -- --publishTag beta",
+    "publish:alpha": "changelogen gh release && changelogen --publish --publishTag alpha",
+    "publish:beta": "changelogen gh release && changelogen --publish --publishTag beta",
     "publish:latest": "changelogen gh release && changelogen --publish",
-    "release:alpha": "npm run release -- --prerelease alpha",
-    "release:beta": "npm run release -- --prerelease beta",
+    "release:alpha": "changelogen --bump --output --prerelease alpha",
+    "release:beta": "changelogen --bump --output --prerelease beta",
     "release:latest": "changelogen --bump --output --no-tag",
     "spellcheck": "cspell lint",
     "spellcheck:ci": "npm run spellcheck -- --no-progress",
@@ -102,7 +99,12 @@
     "node": ">=18.0.0"
   },
   "files": [
-    "lib"
+    "lib",
+    "pdf",
+    "svg",
+    "errors",
+    "types",
+    "utils"
   ],
   "peerDependencies": {
     "pdfkit": ">=0.13.0",
@@ -117,28 +119,28 @@
     }
   },
   "dependencies": {
-    "svg-engine": "^0.2.4"
+    "svg-engine": "^0.3.0"
   },
   "devDependencies": {
-    "@cspell/dict-fr-fr": "^2.2.2",
-    "@cspell/dict-it-it": "^3.1.0",
-    "@schoero/configs": "^1.1.1",
-    "@types/node": "^22.5.2",
-    "@types/pdfkit": "^0.13.4",
+    "@cspell/dict-fr-fr": "^2.3.2",
+    "@cspell/dict-it-it": "^3.1.6",
+    "@schoero/configs": "^1.5.17",
+    "@types/node": "^24.10.1",
+    "@types/pdfkit": "^0.17.3",
     "@types/svg-parser": "^2.0.6",
-    "changelogen": "^0.5.5",
-    "cross-env": "^7.0.3",
-    "cspell": "^8.14.2",
-    "eslint": "^9.9.1",
-    "glob": "^11.0.0",
-    "markdownlint": "^0.34.0",
-    "pdfkit": "^0.15.0",
-    "typescript": "^5.5.4",
-    "unwritten": "^0.2.13",
-    "vite": "^5.4.2",
-    "vite-plugin-dts": "^4.1.0",
+    "changelogen": "^0.6.2",
+    "cross-env": "^10.1.0",
+    "cspell": "^9.3.2",
+    "eslint": "^9.39.1",
+    "glob": "^13.0.0",
+    "markdownlint": "^0.39.0",
+    "pdfkit": "^0.17.2",
+    "typescript": "^5.9.3",
+    "unwritten": "^0.2.14",
+    "vite": "^7.2.4",
+    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-no-bundle": "^4.0.0",
-    "vitest": "^2.0.5"
+    "vitest": "^4.0.13"
   },
   "keywords": [
     "swiss",
@@ -160,7 +162,6 @@
     "svg"
   ],
   "volta": {
-    "node": "22.1.0"
-  },
-  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
+    "node": "24.1.0"
+  }
 }

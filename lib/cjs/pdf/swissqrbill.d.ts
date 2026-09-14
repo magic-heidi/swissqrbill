@@ -45,6 +45,7 @@ export declare class SwissQRBill {
     private outlines;
     private language;
     private font;
+    private renderAdditionalInformation;
     private qrTheme;
     private _x;
     private _y;
@@ -69,11 +70,11 @@ export declare class SwissQRBill {
      * Checks whether there is enough space on the current page to add the QR Bill.
      *
      * @param doc The PDFKit document instance.
-     * @param xPosition The horizontal position where the QR Bill will be placed.
-     * @param yPosition The vertical position where the QR Bill will be placed.
+     * @param x The horizontal position where the QR Bill will be placed.
+     * @param y The vertical position where the QR Bill will be placed.
      * @returns `true` if there is enough space, otherwise `false`.
      */
-    static isSpaceSufficient(doc: PDFKit.PDFDocument, xPosition: number, yPosition: number): boolean;
+    static isSpaceSufficient(doc: PDFKit.PDFDocument, x?: number, y?: number): boolean;
     /**
      * The horizontal size of the QR Bill.
      */

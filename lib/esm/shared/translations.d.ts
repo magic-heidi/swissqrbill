@@ -55,4 +55,18 @@ export declare const translations: {
         reference: string;
         separate: string;
     };
+    RM: {
+        acceptancePoint: string;
+        account: string;
+        additionalInformation: string;
+        amount: string;
+        currency: string;
+        inFavourOf: string;
+        payableBy: string;
+        payableByName: string;
+        paymentPart: string;
+        receipt: string;
+        reference: string;
+        separate: string;
+    };
 };

@@ -1,0 +1,4 @@
+{
+  "main": "../lib/cjs/shared/types.cjs",
+  "types": "../lib/cjs/shared/types.d.ts"
+}

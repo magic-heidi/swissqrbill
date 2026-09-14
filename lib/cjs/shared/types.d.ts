@@ -1,4 +1,5 @@
-import { QRTheme } from './qr-code';
+import { QRTheme } from './qr-theme.js';
+export type { QRTheme } from './qr-theme.js';
 export interface Data {
     /**
      * Creditor related data.
@@ -18,10 +19,6 @@ export interface Data {
      * The amount. **Max. 12 digits.**.
      */
     amount?: number;
-    /**
-     * Custom locale for amount.
-     */
-    amountLocale?: string;
     /**
      * Alternative scheme. **Max. 100 characters.**.
      *
@@ -84,6 +81,12 @@ export interface Creditor extends Debtor {
      */
     account: string;
 }
+/**
+ * Colors used to render a Swiss QR code.
+ *
+ * All properties are optional. Unspecified colors use the standard black and
+ * white Swiss QR code appearance.
+ */
 interface QRBillOptions {
     /**
      * Font used for the QR-Bill.
@@ -105,14 +108,29 @@ interface QRBillOptions {
      *
      * @default `DE`
      */
-    language?: "DE" | "EN" | "FR" | "IT";
+    language?: "DE" | "EN" | "FR" | "IT" | "RM";
     /**
      * Whether you want render the outlines. This option may be disabled if you use perforated paper.
      *
      * @default `true`
      */
     outlines?: boolean;
+    /**
+     * Colors used to render the Swiss QR code.
+     *
+     * Use a sufficiently dark `moduleColor` on a light background to preserve
+     * scan reliability.
+     */
     qrTheme?: QRTheme;
+    /**
+     * Whether you want to render `additionalInformation` visibly in the payment part text.
+     * Should to be set to `true` if the field contains personal data within the meaning of the applicable data protection legislation.
+     *
+     * The value is still encoded in the QR payload even when this is `false`.
+     *
+     * @default `true`
+     */
+    renderAdditionalInformation?: boolean;
     /**
      * Whether you want to show the scissors icons or the text `Separate before paying in`.
      *
@@ -137,4 +155,3 @@ export interface SVGOptions extends QRBillOptions {
 export type Language = Exclude<QRBillOptions["language"], undefined>;
 export type FontName = Exclude<QRBillOptions["fontName"], undefined>;
 export type Currency = Exclude<Data["currency"], undefined>;
-export {};
